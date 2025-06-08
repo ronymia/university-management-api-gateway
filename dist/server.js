@@ -14,19 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const config_1 = __importDefault(require("./config"));
-const logger_1 = __importDefault(require("./shared/logger"));
+const logger_1 = require("./shared/logger");
 const redis_1 = require("./shared/redis");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         // Connect to Redis
         yield redis_1.RedisClient.connect();
         const server = app_1.default.listen(config_1.default.port, () => {
-            logger_1.default.info(`Server running on port ${config_1.default.port}`);
+            logger_1.logger.info(`Server running on port ${config_1.default.port}`);
         });
         const exitHandler = () => {
             if (server) {
                 server.close(() => {
-                    logger_1.default.info('Server closed');
+                    logger_1.logger.info('Server closed');
                     process.exit(1);
                 });
             }
@@ -35,13 +35,13 @@ function bootstrap() {
             }
         };
         const unexpectedErrorHandler = (error) => {
-            logger_1.default.error(error);
+            logger_1.logger.error(error);
             exitHandler();
         };
         process.on('uncaughtException', unexpectedErrorHandler);
         process.on('unhandledRejection', unexpectedErrorHandler);
         process.on('SIGTERM', () => {
-            logger_1.default.info('SIGTERM received');
+            logger_1.logger.info('SIGTERM received');
             if (server) {
                 server.close();
             }

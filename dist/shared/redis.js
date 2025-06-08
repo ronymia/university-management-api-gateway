@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisClient = void 0;
 const redis_1 = require("redis");
-const logger_1 = __importDefault(require("./logger"));
+const logger_1 = require("./logger");
 const config_1 = __importDefault(require("../config"));
 const redisClient = (0, redis_1.createClient)({
     // url: config.redis.url
@@ -26,8 +26,8 @@ const redisClient = (0, redis_1.createClient)({
         port: Number(config_1.default.redis.port)
     }
 });
-redisClient.on('error', (err) => logger_1.default.error('Redis Client Error', err));
-redisClient.on('connect', () => logger_1.default.info('Redis Client Connected'));
+redisClient.on('error', (err) => logger_1.logger.error('Redis Client Error', err));
+redisClient.on('connect', () => logger_1.logger.info('Redis Client Connected'));
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     yield redisClient.connect();
 });
