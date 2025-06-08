@@ -16,7 +16,11 @@ const envVarsZodSchema = zod_1.z.object({
     JWT_SECRET: zod_1.z.string(),
     REDIS_URL: zod_1.z.string(),
     AUTH_SERVICE_URL: zod_1.z.string(),
-    CORE_SERVICE_URL: zod_1.z.string()
+    CORE_SERVICE_URL: zod_1.z.string(),
+    REDIS_USER_NAME: zod_1.z.string(),
+    REDIS_PASSWORD: zod_1.z.string(),
+    REDIS_HOST: zod_1.z.string(),
+    REDIS_PORT: zod_1.z.string()
 });
 const envVars = envVarsZodSchema.parse(process.env);
 exports.default = {
@@ -26,7 +30,11 @@ exports.default = {
         secret: envVars.JWT_SECRET
     },
     redis: {
-        url: envVars.REDIS_URL
+        url: envVars.REDIS_URL,
+        userName: envVars.REDIS_USER_NAME,
+        password: envVars.REDIS_PASSWORD,
+        host: envVars.REDIS_HOST,
+        port: envVars.REDIS_PORT
     },
     authServiceUrl: envVars.AUTH_SERVICE_URL,
     coreServiceUrl: envVars.CORE_SERVICE_URL

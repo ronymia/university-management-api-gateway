@@ -15,14 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisClient = void 0;
 const redis_1 = require("redis");
 const logger_1 = __importDefault(require("./logger"));
+const config_1 = __importDefault(require("../config"));
 const redisClient = (0, redis_1.createClient)({
     // url: config.redis.url
     // password: process.env.REDIS_PASSWORD,
-    username: 'default',
-    password: 'ClYsS2MuKXp7su0HBbjlRGOZ3HbxzzOP',
+    username: config_1.default.redis.userName,
+    password: config_1.default.redis.password,
     socket: {
-        host: 'redis-10221.c212.ap-south-1-1.ec2.redns.redis-cloud.com',
-        port: 10221
+        host: config_1.default.redis.host,
+        port: Number(config_1.default.redis.port)
     }
 });
 redisClient.on('error', (err) => logger_1.default.error('Redis Client Error', err));
