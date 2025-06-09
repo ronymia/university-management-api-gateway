@@ -18,7 +18,7 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log({ uploadImage: file });
     // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
     // console.log({ data: req.body });
-    req.body.student.profileImage = file.path;
+    req.body.student.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
     const { academicSemester, academicFaculty, academicDepartment } = req.body.student;
     // GET ACADEMIC SEMESTER
     const getAcademicSemester = yield axios_1.AuthService.get(`/academic-semesters?syncId=${academicSemester}`);
@@ -53,7 +53,7 @@ const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
     // console.log({ uploadImage });
     // SET PROFILE IMAGE
-    req.body.admin.profileImage = file.path;
+    req.body.admin.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
     // GET MANAGEMENT DEPARTMENT
     const { managementDepartment } = req.body.admin;
     // GET MANAGEMENT DEPARTMENT
@@ -79,7 +79,7 @@ const createFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log({ uploadImage: file });
     // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
     // console.log({ data: req.body });
-    req.body.faculty.profileImage = file.path;
+    req.body.faculty.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
     // GET ACADEMIC FACULTY
     const getAcademicFaculty = yield axios_1.AuthService.get(`/academic-faculties?syncId=${academicFaculty}`);
     if (getAcademicFaculty && Array.isArray(getAcademicFaculty.data)) {
