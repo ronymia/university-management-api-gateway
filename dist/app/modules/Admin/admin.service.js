@@ -13,7 +13,7 @@ exports.AdminServices = void 0;
 const axios_1 = require("../../../shared/axios");
 // GET ALL ADMIN
 const getAllAdmins = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/admins`, {
+    const result = yield axios_1.CoreService.get(`/admins`, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -24,7 +24,7 @@ const getAllAdmins = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // GET ADMIN BU ID
 const getSingleAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/admins/${req.params.id}`, {
+    const result = yield axios_1.CoreService.get(`/admins/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -34,7 +34,7 @@ const getSingleAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // UPDATE ADMIN
 const updateAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.patch(`/admins/${req.params.id}`, req.body, {
+    const result = yield axios_1.CoreService.patch(`/admins/${req.params.id}`, req.body, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -44,7 +44,7 @@ const updateAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // DELETE ADMIN
 const deleteAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.delete(`/admins/${req.params.id}`, {
+    const result = yield axios_1.CoreService.delete(`/admins/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }

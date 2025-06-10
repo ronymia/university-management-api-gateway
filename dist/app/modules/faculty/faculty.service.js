@@ -13,7 +13,7 @@ exports.FacultyServices = void 0;
 const axios_1 = require("../../../shared/axios");
 // GET ALL FACULTY
 const getAllFaculties = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/faculties`, {
+    const result = yield axios_1.CoreService.get(`/faculties`, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -24,7 +24,7 @@ const getAllFaculties = (req) => __awaiter(void 0, void 0, void 0, function* () 
 });
 // GET FACULTY BY ID
 const getSingleFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/faculties/${req.params.id}`, {
+    const result = yield axios_1.CoreService.get(`/faculties/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -34,7 +34,7 @@ const getSingleFaculty = (req) => __awaiter(void 0, void 0, void 0, function* ()
 });
 // UPDATE FACULTY
 const updateFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.patch(`/faculties/${req.params.id}`, req.body, {
+    const result = yield axios_1.CoreService.patch(`/faculties/${req.params.id}`, req.body, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -44,7 +44,7 @@ const updateFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // DELETE FACULTY
 const deleteFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.delete(`/faculties/${req.params.id}`, {
+    const result = yield axios_1.CoreService.delete(`/faculties/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }

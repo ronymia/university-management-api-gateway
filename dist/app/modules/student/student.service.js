@@ -13,7 +13,7 @@ exports.StudentServices = void 0;
 const axios_1 = require("../../../shared/axios");
 // GET ALL STUDENT
 const getAllStudents = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/students`, {
+    const result = yield axios_1.CoreService.get(`/students`, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -24,7 +24,7 @@ const getAllStudents = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // GET STUDENT BY ID
 const getSingleStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/students/${req.params.id}`, {
+    const result = yield axios_1.CoreService.get(`/students/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -34,7 +34,7 @@ const getSingleStudent = (req) => __awaiter(void 0, void 0, void 0, function* ()
 });
 // UPDATE STUDENT
 const updateStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.patch(`/students/${req.params.id}`, req.body, {
+    const result = yield axios_1.CoreService.patch(`/students/${req.params.id}`, req.body, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -44,7 +44,7 @@ const updateStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // DELETE STUDENT
 const deleteStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.delete(`/students/${req.params.id}`, {
+    const result = yield axios_1.CoreService.delete(`/students/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }

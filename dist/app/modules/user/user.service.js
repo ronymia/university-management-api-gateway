@@ -62,6 +62,7 @@ const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
     if (getManagementDepartment) {
         req.body.admin.managementDepartment = (_d = getManagementDepartment === null || getManagementDepartment === void 0 ? void 0 : getManagementDepartment.data) === null || _d === void 0 ? void 0 : _d.id;
     }
+    console.log({ headers: req.headers });
     // CREATE ADMIN ON MONGODB
     const result = yield axios_1.AuthService.post('users/create-admin', req.body, {
         headers: {
