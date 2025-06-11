@@ -26,7 +26,7 @@ const getSingleCourse = (req) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield axios_1.CoreService.get(`/courses/${req.params.id}`, {
         params: req.query,
         headers: {
-            Authorization: req.headers.Authorization
+            Authorization: req.headers.authorization
         }
     });
     return result;

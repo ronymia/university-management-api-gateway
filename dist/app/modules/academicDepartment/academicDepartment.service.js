@@ -37,7 +37,7 @@ const getSingleAcademicDepartment = (req) => __awaiter(void 0, void 0, void 0, f
     const result = yield axios_1.CoreService.get(`/academic-departments/${req.params.id}`, {
         params: req.query,
         headers: {
-            Authorization: req.headers.Authorization
+            Authorization: req.headers.authorization
         }
     });
     return result;

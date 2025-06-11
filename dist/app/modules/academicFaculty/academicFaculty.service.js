@@ -36,7 +36,7 @@ const getSingleAcademicFaculty = (req) => __awaiter(void 0, void 0, void 0, func
     const result = yield axios_1.CoreService.get(`/academic-faculties/${req.params.id}`, {
         params: req.query,
         headers: {
-            Authorization: req.headers.Authorization
+            Authorization: req.headers.authorization
         }
     });
     return result;
