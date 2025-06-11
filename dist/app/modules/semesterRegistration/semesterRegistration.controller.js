@@ -119,6 +119,24 @@ const startNewSemester = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         next(error);
     }
 });
+const startMyRegistration = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield semesterRegistration_service_1.SemesterRegistrationServices.startMyRegistration(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+const getMySemesterRegCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield semesterRegistration_service_1.SemesterRegistrationServices.getMySemesterRegCourses(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
 // EXPORT CONTROLLERS
 exports.SemesterRegistrationControllers = {
     createSemesterRegistration,
@@ -131,5 +149,7 @@ exports.SemesterRegistrationControllers = {
     withdrawFromEnrolledCourse,
     confirmMyRegistration,
     getMyRegistration,
-    startNewSemester
+    startNewSemester,
+    startMyRegistration,
+    getMySemesterRegCourses
 };

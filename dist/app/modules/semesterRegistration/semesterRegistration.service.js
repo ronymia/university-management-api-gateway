@@ -99,7 +99,7 @@ const withdrawFromEnrolledCourse = (req) => __awaiter(void 0, void 0, void 0, fu
 });
 // CONFIRM MY REGISTRATION
 const confirmMyRegistration = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.patch(`/semester-registrations/confirm-my-registration`, req.body, {
+    const result = yield axios_1.CoreService.post(`/semester-registrations/confirm-my-registration`, req.body, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -130,6 +130,28 @@ const startNewSemester = (req) => __awaiter(void 0, void 0, void 0, function* ()
     // RETURN
     return result;
 });
+// START NEW SEMESTER
+const startMyRegistration = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.post(`/semester-registrations/start-registration`, req.body, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// START NEW SEMESTER
+const getMySemesterRegCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/semester-registrations/get-my-semester-courses`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
 // EXPORT SERVICES
 exports.SemesterRegistrationServices = {
     createSemesterRegistration,
@@ -142,5 +164,7 @@ exports.SemesterRegistrationServices = {
     withdrawFromEnrolledCourse,
     confirmMyRegistration,
     getMyRegistration,
-    startNewSemester
+    startNewSemester,
+    startMyRegistration,
+    getMySemesterRegCourses
 };
