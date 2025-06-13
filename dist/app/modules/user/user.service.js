@@ -17,7 +17,7 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const file = req.file;
     // console.log({ uploadImage: file });
     // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
-    console.log('data', { data: req.body });
+    // console.log('data', { data: req.body });
     req.body.student.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
     const { academicSemester, academicFaculty, academicDepartment } = req.body.student;
     try {
@@ -27,7 +27,7 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
                 Authorization: req.headers.authorization
             }
         });
-        console.log({ getAcademicSemester });
+        // console.log({ getAcademicSemester });
         if (getAcademicSemester && Array.isArray(getAcademicSemester.data)) {
             req.body.student.academicSemester = (_a = getAcademicSemester === null || getAcademicSemester === void 0 ? void 0 : getAcademicSemester.data[0]) === null || _a === void 0 ? void 0 : _a.id;
         }
@@ -37,7 +37,7 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
                 Authorization: req.headers.authorization
             }
         });
-        console.log({ getAcademicFaculty });
+        // console.log({ getAcademicFaculty });
         if (getAcademicFaculty && Array.isArray(getAcademicFaculty.data)) {
             req.body.student.academicFaculty = (_b = getAcademicFaculty === null || getAcademicFaculty === void 0 ? void 0 : getAcademicFaculty.data[0]) === null || _b === void 0 ? void 0 : _b.id;
         }
@@ -47,7 +47,7 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
                 Authorization: req.headers.authorization
             }
         });
-        console.log({ getAcademicDepartment });
+        // console.log({ getAcademicDepartment });
         if (getAcademicDepartment && Array.isArray(getAcademicDepartment.data)) {
             //
             req.body.student.academicDepartment = (_c = getAcademicDepartment === null || getAcademicDepartment === void 0 ? void 0 : getAcademicDepartment.data[0]) === null || _c === void 0 ? void 0 : _c.id;
@@ -75,9 +75,9 @@ const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // console.log({ uploadImage });
     // SET PROFILE IMAGE
     req.body.admin.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
+    const { managementDepartment } = req.body.admin;
     try {
         // GET MANAGEMENT DEPARTMENT
-        const { managementDepartment } = req.body.admin;
         // GET MANAGEMENT DEPARTMENT
         const getManagementDepartment = yield axios_1.AuthService.get(`/management-departments/${managementDepartment}`, {
             headers: {

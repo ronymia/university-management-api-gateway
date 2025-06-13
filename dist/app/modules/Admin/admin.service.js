@@ -34,6 +34,25 @@ const getSingleAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // UPDATE ADMIN
 const updateAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    const { managementDepartment } = req.body;
+    try {
+        // GET MANAGEMENT DEPARTMENT
+        // GET MANAGEMENT DEPARTMENT
+        const getManagementDepartment = yield axios_1.AuthService.get(`/management-departments/${managementDepartment}`, {
+            headers: {
+                Authorization: req.headers.authorization
+            }
+        });
+        // SET MANAGEMENT DEPARTMENT
+        if (getManagementDepartment) {
+            req.body.managementDepartment = (_a = getManagementDepartment === null || getManagementDepartment === void 0 ? void 0 : getManagementDepartment.data) === null || _a === void 0 ? void 0 : _a.id;
+        }
+    }
+    catch (error) {
+        // console.error({ error });
+        throw new Error('Management-Department sync failed');
+    }
     const result = yield axios_1.AuthService.patch(`/admins/${req.params.id}`, req.body, {
         headers: {
             Authorization: req.headers.authorization

@@ -13,7 +13,7 @@ exports.FacultyServices = void 0;
 const axios_1 = require("../../../shared/axios");
 // GET ALL FACULTY
 const getAllFaculties = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.get(`/faculties`, {
+    const result = yield axios_1.AuthService.get(`/faculties`, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -24,7 +24,7 @@ const getAllFaculties = (req) => __awaiter(void 0, void 0, void 0, function* () 
 });
 // GET FACULTY BY ID
 const getSingleFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.get(`/faculties/${req.params.id}`, {
+    const result = yield axios_1.AuthService.get(`/faculties/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -34,7 +34,30 @@ const getSingleFaculty = (req) => __awaiter(void 0, void 0, void 0, function* ()
 });
 // UPDATE FACULTY
 const updateFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.patch(`/faculties/${req.params.id}`, req.body, {
+    var _a, _b;
+    const { academicFaculty, academicDepartment } = req.body;
+    try {
+        const facultyRes = yield axios_1.AuthService.get(`/academic-faculties?syncId=${academicFaculty}`, {
+            headers: { authorization: req.headers.authorization }
+        });
+        // console.log('Faculty response:', facultyRes.data);
+        if ((_a = facultyRes === null || facultyRes === void 0 ? void 0 : facultyRes.data) === null || _a === void 0 ? void 0 : _a.length) {
+            req.body.academicFaculty = facultyRes.data[0].id;
+        }
+        const deptRes = yield axios_1.AuthService.get(`/academic-departments?syncId=${academicDepartment}`, {
+            headers: { Authorization: req.headers.authorization }
+        });
+        // console.log('Department response:', deptRes.data);
+        if ((_b = deptRes === null || deptRes === void 0 ? void 0 : deptRes.data) === null || _b === void 0 ? void 0 : _b.length) {
+            req.body.academicDepartment = deptRes.data[0].id;
+        }
+    }
+    catch (error) {
+        console.error('Sync API error:', error);
+        throw new Error('Faculty/Department sync failed');
+    }
+    // MADE REQUEST for update
+    const result = yield axios_1.AuthService.patch(`/faculties/${req.params.id}`, req.body, {
         headers: {
             Authorization: req.headers.authorization
         }
@@ -44,7 +67,7 @@ const updateFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // DELETE FACULTY
 const deleteFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.delete(`/faculties/${req.params.id}`, {
+    const result = yield axios_1.AuthService.delete(`/faculties/${req.params.id}`, {
         headers: {
             Authorization: req.headers.authorization
         }
