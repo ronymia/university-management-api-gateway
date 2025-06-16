@@ -41,7 +41,7 @@ const getSingleStudentEnrolledCourseMark = (req) => __awaiter(void 0, void 0, vo
     return result;
 });
 const updateStudentEnrolledCourseMark = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.patch(`/student-enrolled-course-marks/update-mark`, req.body, {
+    const result = yield axios_1.CoreService.patch(`/student-enrolled-course-marks/update-marks`, req.body, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -51,7 +51,7 @@ const updateStudentEnrolledCourseMark = (req) => __awaiter(void 0, void 0, void 
     return result;
 });
 const updateStudentEnrolledCourseFinalMark = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.patch(`/student-enrolled-course-marks/update-final-mark`, req.body, {
+    const result = yield axios_1.CoreService.patch(`/student-enrolled-course-marks/update-final-marks`, req.body, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization

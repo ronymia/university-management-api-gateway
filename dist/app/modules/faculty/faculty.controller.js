@@ -16,6 +16,16 @@ exports.FacultyControllers = void 0;
 const response_1 = __importDefault(require("../../../shared/response"));
 const faculty_service_1 = require("./faculty.service");
 // GET ALL FACULTY
+const getAllFacultiesFromCore = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield faculty_service_1.FacultyServices.getAllFacultiesFromCore(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// GET ALL FACULTY
 const getAllFaculties = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield faculty_service_1.FacultyServices.getAllFaculties(req);
@@ -55,10 +65,33 @@ const deleteFaculty = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error);
     }
 });
+// GET ALL FACULTY
+const myCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield faculty_service_1.FacultyServices.myCourses(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// GET ALL FACULTY
+const getMyCourseStudents = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield faculty_service_1.FacultyServices.getMyCourseStudents(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
 // EXPORT CONTROLLERS
 exports.FacultyControllers = {
+    getAllFacultiesFromCore,
     getAllFaculties,
     getSingleFaculty,
     updateFaculty,
-    deleteFaculty
+    deleteFaculty,
+    myCourses,
+    getMyCourseStudents
 };

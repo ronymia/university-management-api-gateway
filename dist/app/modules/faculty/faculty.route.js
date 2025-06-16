@@ -7,8 +7,10 @@ exports.FacultyRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const faculty_controller_1 = require("./faculty.controller");
 const router = express_1.default.Router();
-// router.route('/').post(FacultyControllers.createRoom);
 router.route('/').get(faculty_controller_1.FacultyControllers.getAllFaculties);
+router.route('/my-courses').get(faculty_controller_1.FacultyControllers.myCourses);
+router.get('/my-course-students', faculty_controller_1.FacultyControllers.getMyCourseStudents);
+router.route('/core-faculties').get(faculty_controller_1.FacultyControllers.getAllFacultiesFromCore);
 router.route('/:id').get(faculty_controller_1.FacultyControllers.getSingleFaculty);
 router
     .route('/:id')

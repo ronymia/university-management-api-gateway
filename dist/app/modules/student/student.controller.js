@@ -55,10 +55,52 @@ const deleteStudent = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error);
     }
 });
+// GET ALL STUDENT
+const mySemesterRegCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield student_service_1.StudentServices.mySemesterRegCourses(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// GET MY COURSES
+const myCourses = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield student_service_1.StudentServices.myCourses(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+const myCourseSchedules = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield student_service_1.StudentServices.myCourseSchedules(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+const myAcademicInfo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield student_service_1.StudentServices.myAcademicInfo(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
 // EXPORT CONTROLLERS
 exports.StudentControllers = {
     getAllStudents,
     getSingleStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    myCourses,
+    mySemesterRegCourses,
+    myCourseSchedules,
+    myAcademicInfo
 };

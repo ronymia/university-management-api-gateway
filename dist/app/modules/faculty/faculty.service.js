@@ -12,6 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FacultyServices = void 0;
 const axios_1 = require("../../../shared/axios");
 // GET ALL FACULTY
+const getAllFacultiesFromCore = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/faculties`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// GET ALL FACULTY
 const getAllFaculties = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield axios_1.AuthService.get(`/faculties`, {
         params: req.query,
@@ -75,10 +86,55 @@ const deleteFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // RETURN
     return result;
 });
+const assignCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.post(`/faculties/${req.params.id}/assigned-courses`, req.body, {
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+const removeCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.patch(`/faculties/${req.params.id}/remove-courses`, req.body, {
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// GET ALL FACULTY
+const myCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/faculties/my-courses`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// GET ALL FACULTY
+const getMyCourseStudents = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/faculties/my-course-students`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
 // EXPORT SERVICES
 exports.FacultyServices = {
+    getAllFacultiesFromCore,
     getAllFaculties,
     getSingleFaculty,
     updateFaculty,
-    deleteFaculty
+    deleteFaculty,
+    assignCourses,
+    removeCourses,
+    myCourses,
+    getMyCourseStudents
 };

@@ -10,10 +10,10 @@ const router = express_1.default.Router();
 router.route('/').get(studentEnrolledCourseMark_controller_1.StudentEnrolledCourseMarkControllers.getAllStudentEnrolledCourseMarks);
 router.route('/:id').get(studentEnrolledCourseMark_controller_1.StudentEnrolledCourseMarkControllers.getSingleStudentEnrolledCourseMark);
 router
-    .route('/update-mark')
+    .route('/update-marks')
     .patch(studentEnrolledCourseMark_controller_1.StudentEnrolledCourseMarkControllers.updateStudentEnrolledCourseMark);
 router
-    .route('/update-final-mark')
+    .route('/update-final-marks')
     .patch(studentEnrolledCourseMark_controller_1.StudentEnrolledCourseMarkControllers.updateStudentEnrolledCourseFinalMark);
 // EXPORT ROUTERS
 exports.StudentEnrolledCourseMarkRoutes = router;

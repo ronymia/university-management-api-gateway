@@ -22,6 +22,7 @@ const getAllStudents = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // RETURN
     return result;
 });
+// GET ALL STUDENT
 // GET STUDENT BY ID
 const getSingleStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield axios_1.AuthService.get(`/students/${req.params.id}`, {
@@ -92,10 +93,55 @@ const deleteStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // RETURN
     return result;
 });
+const mySemesterRegCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.AuthService.get(`/students/my-semester-reg-courses`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// MY COURSES
+const myCourses = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/students/my-courses`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+const myCourseSchedules = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/students/my-course-schedules`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+const myAcademicInfo = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.CoreService.get(`/students/my-academic-info`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
 // EXPORT SERVICES
 exports.StudentServices = {
     getAllStudents,
     getSingleStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    myCourses,
+    mySemesterRegCourses,
+    myCourseSchedules,
+    myAcademicInfo
 };

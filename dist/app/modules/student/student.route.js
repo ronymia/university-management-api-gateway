@@ -7,7 +7,10 @@ exports.StudentRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const student_controller_1 = require("./student.controller");
 const router = express_1.default.Router();
-// router.route('/').post(StudentControllers.createRoom);
+router.get('/my-courses', student_controller_1.StudentControllers.myCourses);
+router.get('/my-semester-reg-courses', student_controller_1.StudentControllers.mySemesterRegCourses);
+router.get('/my-course-schedules', student_controller_1.StudentControllers.myCourseSchedules);
+router.get('/my-academic-info', student_controller_1.StudentControllers.myAcademicInfo);
 router.route('/').get(student_controller_1.StudentControllers.getAllStudents);
 router.route('/:id').get(student_controller_1.StudentControllers.getSingleStudent);
 router
