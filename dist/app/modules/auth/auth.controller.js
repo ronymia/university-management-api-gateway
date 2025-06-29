@@ -31,18 +31,21 @@ const http_status_1 = __importDefault(require("http-status"));
 // LOGIN USER
 const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const _a = (yield auth_service_1.AuthServices.loginUser(req)).data, { refreshToken } = _a, result = __rest(_a, ["refreshToken"]);
+        const result = yield auth_service_1.AuthServices.loginUser(req);
+        // console.log({ result });
+        const _a = result.data, { refreshToken } = _a, rest = __rest(_a, ["refreshToken"]);
         // set refresh token to cookie
         const cookieOptions = {
             secure: config_1.default.env === 'production',
             httpOnly: true
         };
         res.cookie('refreshToken', refreshToken, cookieOptions);
+        // SEND RESPONSE
         (0, response_1.default)(res, {
             statusCode: http_status_1.default.OK,
             success: true,
             message: 'User login successfully !',
-            data: result
+            data: rest
         });
     }
     catch (error) {
@@ -53,17 +56,39 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
 const refreshToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield auth_service_1.AuthServices.refreshToken(req);
+        // const { refreshToken, ...rest } = result.data;
+        // console.log({ result, rest });
         // set refresh token to cookie
-        const cookieOptions = {
-            secure: config_1.default.env === 'production',
-            httpOnly: true
-        };
-        res.cookie('refreshToken', result, cookieOptions);
+        // const cookieOptions = {
+        //   secure: config.env === 'production',
+        //   httpOnly: true
+        // };
+        // res.cookie('refreshToken', refreshToken, cookieOptions);
         (0, response_1.default)(res, {
             statusCode: http_status_1.default.OK,
             success: true,
             message: 'Get Refresh token successfully !',
-            data: result
+            data: result.data
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// GET REFRESH TOKEN
+const logout = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield auth_service_1.AuthServices.logout(req);
+        // delete refresh token from cookie
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure: config_1.default.env === 'production'
+        });
+        (0, response_1.default)(res, {
+            statusCode: http_status_1.default.OK,
+            success: true,
+            message: 'User logout success',
+            data: result.data
         });
     }
     catch (error) {
@@ -82,6 +107,7 @@ const changePassword = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 });
 // EXPORT CONTROLLERS
 exports.AuthControllers = {
+    logout,
     loginUser,
     refreshToken,
     changePassword

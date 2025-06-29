@@ -16,7 +16,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const apiError_1 = __importDefault(require("../../errors/apiError"));
 const jwtHelper_1 = require("../../helpers/jwtHelper");
 const auth = (...requiredRoles) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => {
         const token = req.headers.authorization.split(' ')[1];
         if (!token) {
             return reject(new apiError_1.default(http_status_1.default.UNAUTHORIZED, 'Unauthorized'));
@@ -30,7 +30,7 @@ const auth = (...requiredRoles) => (req, res, next) => __awaiter(void 0, void 0,
             return reject(new apiError_1.default(http_status_1.default.FORBIDDEN, 'Forbidden'));
         }
         resolve(verifiedUser);
-    }))
+    })
         .then(() => next())
         .catch((err) => next(err));
 });

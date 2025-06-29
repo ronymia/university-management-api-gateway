@@ -13,6 +13,9 @@ auth_controller_1.AuthControllers.loginUser);
 router.post('/refresh-token', 
 //   validateRequest(AuthValidation.refreshTokenZodSchema),
 auth_controller_1.AuthControllers.refreshToken);
+router.post('/logout', 
+//   validateRequest(AuthValidation.refreshTokenZodSchema),
+auth_controller_1.AuthControllers.logout);
 router.post('/change-password', 
 //   validateRequest(AuthValidation.changePasswordZodSchema),
 auth_controller_1.AuthControllers.changePassword);

@@ -16,10 +16,22 @@ const loginUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // RETURN
     return result;
 });
-// UPDATE STUDENT
+// HANDLE ACCESS TOKEN THROUGH REFRESH TOKEN
 const refreshToken = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const { refreshToken } = req.cookies;
     const result = yield axios_1.AuthService.post(`/auth/refresh-token`, req.body, {
+        headers: {
+            cookie: `refreshToken=${refreshToken}`
+        }
+    });
+    // RETURN
+    return result;
+});
+// logout
+const logout = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    //
+    const { refreshToken } = req.cookies;
+    const result = yield axios_1.AuthService.post(`/auth/logout`, req.body, {
         headers: {
             cookie: `refreshToken=${refreshToken}`
         }
@@ -39,6 +51,7 @@ const changePassword = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // EXPORT SERVICES
 exports.AuthServices = {
+    logout,
     loginUser,
     refreshToken,
     changePassword
