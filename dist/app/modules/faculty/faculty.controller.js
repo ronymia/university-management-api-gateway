@@ -16,15 +16,14 @@ exports.FacultyControllers = void 0;
 const response_1 = __importDefault(require("../../../shared/response"));
 const faculty_service_1 = require("./faculty.service");
 // GET ALL FACULTY
-const getAllFacultiesFromCore = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const result = yield faculty_service_1.FacultyServices.getAllFacultiesFromCore(req);
-        (0, response_1.default)(res, result);
-    }
-    catch (error) {
-        next(error);
-    }
-});
+// const getAllFacultiesFromCore = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     const result = await FacultyServices.getAllFacultiesFromCore(req);
+//     sendResponse(res, result);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 // GET ALL FACULTY
 const getAllFaculties = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -87,7 +86,7 @@ const getMyCourseStudents = (req, res, next) => __awaiter(void 0, void 0, void 0
 });
 // EXPORT CONTROLLERS
 exports.FacultyControllers = {
-    getAllFacultiesFromCore,
+    // getAllFacultiesFromCore,
     getAllFaculties,
     getSingleFaculty,
     updateFaculty,

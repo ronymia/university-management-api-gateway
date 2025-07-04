@@ -33,5 +33,22 @@ fileUploadHelper_1.FileUploadHelper.upload.single('file'), (req, res, next) => {
     req.body = user_validation_1.UserValidation.createFacultyZodSchema.parse(JSON.parse(req.body.data));
     return user_controller_1.UserControllers.createFaculty(req, res, next);
 });
+// GET ALL USERS
+router.route('/').get(user_controller_1.UserControllers.getAllUsers);
+// GET SINGLE USER
+router.route('/:id').get(user_controller_1.UserControllers.getSingleUser);
+// UPDATE USER
+router
+    .route('/:id')
+    .patch(
+//   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
+user_controller_1.UserControllers.updateUser
+// FileUploadHelper.upload.single('file'),
+// (req: Request, res: Response, next: NextFunction) => {
+//   req.body = UserValidation.updateUserZodSchema.parse(JSON.parse(req.body.data));
+//   return UserControllers.updateUser(req, res, next);
+// }
+)
+    .delete(user_controller_1.UserControllers.deleteUser);
 // EXPORT ROUTERS
 exports.UserRoutes = router;

@@ -10,7 +10,7 @@ const router = express_1.default.Router();
 router.route('/').get(faculty_controller_1.FacultyControllers.getAllFaculties);
 router.route('/my-courses').get(faculty_controller_1.FacultyControllers.myCourses);
 router.get('/my-course-students', faculty_controller_1.FacultyControllers.getMyCourseStudents);
-router.route('/core-faculties').get(faculty_controller_1.FacultyControllers.getAllFacultiesFromCore);
+// router.route('/core-faculties').get(FacultyControllers.getAllFacultiesFromCore);
 router.route('/:id').get(faculty_controller_1.FacultyControllers.getSingleFaculty);
 router
     .route('/:id')

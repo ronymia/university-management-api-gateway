@@ -12,19 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FacultyServices = void 0;
 const axios_1 = require("../../../shared/axios");
 // GET ALL FACULTY
-const getAllFacultiesFromCore = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.CoreService.get(`/faculties`, {
-        params: req.query,
-        headers: {
-            Authorization: req.headers.authorization
-        }
-    });
-    // RETURN
-    return result;
-});
+// const getAllFacultiesFromCore = async (req: Request): Promise<IGenericResponse> => {
+//   const result: IGenericResponse = await HttpService.get(`/faculties`, {
+//     params: req.query,
+//     headers: {
+//       Authorization: req.headers.authorization
+//     }
+//   });
+//   // RETURN
+//   return result;
+// };
 // GET ALL FACULTY
 const getAllFaculties = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield axios_1.AuthService.get(`/faculties`, {
+    const result = yield axios_1.CoreService.get(`/faculties`, {
         params: req.query,
         headers: {
             Authorization: req.headers.authorization
@@ -128,7 +128,7 @@ const getMyCourseStudents = (req) => __awaiter(void 0, void 0, void 0, function*
 });
 // EXPORT SERVICES
 exports.FacultyServices = {
-    getAllFacultiesFromCore,
+    // getAllFacultiesFromCore,
     getAllFaculties,
     getSingleFaculty,
     updateFaculty,

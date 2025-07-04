@@ -139,9 +139,54 @@ const createFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
     });
     return result;
 });
+// GET ALL ADMIN
+const getAllUsers = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.AuthService.get(`/users`, {
+        params: req.query,
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// GET ADMIN BU ID
+const getSingleUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.AuthService.get(`/users/${req.params.id}`, {
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// UPDATE ADMIN
+const updateUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.AuthService.patch(`/users/${req.params.id}`, req.body, {
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
+// DELETE ADMIN
+const deleteUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield axios_1.AuthService.delete(`/users/${req.params.id}`, {
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
 // EXPORT SERVICES
 exports.UserServices = {
     createStudent,
     createAdmin,
-    createFaculty
+    createFaculty,
+    getAllUsers,
+    getSingleUser,
+    updateUser,
+    deleteUser
 };

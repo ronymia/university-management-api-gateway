@@ -45,8 +45,52 @@ const createFaculty = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         next(error);
     }
 });
+// GET ALL USERS
+const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_service_1.UserServices.getAllUsers(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// GET SINGLE USER
+const getSingleUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_service_1.UserServices.getSingleUser(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// UPDATE USER
+const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_service_1.UserServices.updateUser(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// DELETE USER
+const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_service_1.UserServices.updateUser(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
 exports.UserControllers = {
     createStudent,
     createAdmin,
-    createFaculty
+    createFaculty,
+    getAllUsers,
+    getSingleUser,
+    updateUser,
+    deleteUser
 };
