@@ -158,7 +158,7 @@ const createAdminZodSchema = zod_1.z.object({
         designation: zod_1.z.string({
             required_error: 'Designation is required'
         }),
-        profileImage: zod_1.z.string().optional()
+        profileImage: zod_1.z.any().optional()
     })
 });
 exports.UserValidation = {

@@ -14,11 +14,7 @@ const axios_1 = require("../../../shared/axios");
 // CREATE STUDENT
 const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
-    const file = req.file;
-    // console.log({ uploadImage: file });
-    // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
-    // console.log('data', { data: req.body });
-    req.body.student.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
+    req.body.student.profileImage = (req === null || req === void 0 ? void 0 : req.fileRelativePath) || '';
     const { academicSemester, academicFaculty, academicDepartment } = req.body.student;
     try {
         // GET ACADEMIC SEMESTER
@@ -69,15 +65,10 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
 // CREATE ADMIN
 const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
     var _d;
-    const file = req.file;
-    // console.log({ file });
-    // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
-    // console.log({ uploadImage });
     // SET PROFILE IMAGE
-    req.body.admin.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
+    req.body.admin.profileImage = (req === null || req === void 0 ? void 0 : req.fileRelativePath) || '';
     const { managementDepartment } = req.body.admin;
     try {
-        // GET MANAGEMENT DEPARTMENT
         // GET MANAGEMENT DEPARTMENT
         const getManagementDepartment = yield axios_1.AuthService.get(`/management-departments/${managementDepartment}`, {
             headers: {
@@ -106,10 +97,8 @@ const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
 const createFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
     var _e, _f;
     const { academicFaculty, academicDepartment } = req.body.faculty;
-    const file = req.file;
-    // console.log({ uploadImage: file });
-    // const uploadImage = await FileUploadHelper.uploadToCloudinary(file);
-    req.body.faculty.profileImage = (file === null || file === void 0 ? void 0 : file.path) || '';
+    // SET PROFILE IMAGE
+    req.body.faculty.profileImage = (req === null || req === void 0 ? void 0 : req.fileRelativePath) || '';
     // console.log({ data: req.body });
     try {
         const facultyRes = yield axios_1.AuthService.get(`/academic-faculties?syncId=${academicFaculty}`, {
