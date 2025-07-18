@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const multer_1 = __importDefault(require("multer"));
-const path_1 = __importDefault(require("path"));
 const supabase_js_1 = require("@supabase/supabase-js");
 // Setup Supabase client with service role key (⚠️ never expose this to frontend)
 const supabase = (0, supabase_js_1.createClient)(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
@@ -32,9 +31,9 @@ const uploadToSupabase = (bucket, folder = '') => {
                     return res.status(400).json({ error: 'No file uploaded' });
                 }
                 const file = req.file;
-                const ext = path_1.default.extname(file.originalname);
+                // const ext = path.extname(file.originalname);
                 const filename = `${folder}${Date.now()}_${file.originalname}`;
-                const { error, data } = yield supabase.storage.from(bucket).upload(filename, file.buffer, {
+                const { error } = yield supabase.storage.from(bucket).upload(filename, file.buffer, {
                     contentType: file.mimetype,
                     upsert: true
                 });
