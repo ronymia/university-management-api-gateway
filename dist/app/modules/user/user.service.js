@@ -14,7 +14,7 @@ const axios_1 = require("../../../shared/axios");
 // CREATE STUDENT
 const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
-    req.body.student.profileImage = (req === null || req === void 0 ? void 0 : req.fileRelativePath) || '';
+    req.body.student.profileImage = (req === null || req === void 0 ? void 0 : req.fileURL) || '';
     const { academicSemester, academicFaculty, academicDepartment } = req.body.student;
     try {
         // GET ACADEMIC SEMESTER
@@ -64,26 +64,27 @@ const createStudent = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // CREATE ADMIN
 const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    var _d;
     // SET PROFILE IMAGE
-    req.body.admin.profileImage = (req === null || req === void 0 ? void 0 : req.fileRelativePath) || '';
-    const { managementDepartment } = req.body.admin;
-    try {
-        // GET MANAGEMENT DEPARTMENT
-        const getManagementDepartment = yield axios_1.AuthService.get(`/management-departments/${managementDepartment}`, {
-            headers: {
-                Authorization: req.headers.authorization
-            }
-        });
-        // SET MANAGEMENT DEPARTMENT
-        if (getManagementDepartment) {
-            req.body.admin.managementDepartment = (_d = getManagementDepartment === null || getManagementDepartment === void 0 ? void 0 : getManagementDepartment.data) === null || _d === void 0 ? void 0 : _d.id;
-        }
-    }
-    catch (error) {
-        // console.error({ error });
-        throw new Error('Management-Department sync failed');
-    }
+    req.body.admin.profileImage = (req === null || req === void 0 ? void 0 : req.fileURL) || '';
+    // const { managementDepartment } = req.body.admin;
+    // try {
+    //   // GET MANAGEMENT DEPARTMENT
+    //   const getManagementDepartment = await AuthService.get(
+    //     `/management-departments/${managementDepartment}`,
+    //     {
+    //       headers: {
+    //         Authorization: req.headers.authorization
+    //       }
+    //     }
+    //   );
+    //   // SET MANAGEMENT DEPARTMENT
+    //   if (getManagementDepartment) {
+    //     req.body.admin.managementDepartment = getManagementDepartment?.data?.id;
+    //   }
+    // } catch (error) {
+    //   // console.error({ error });
+    //   throw new Error('Management-Department sync failed');
+    // }
     // CREATE ADMIN ON MONGODB
     const result = yield axios_1.AuthService.post('users/create-admin', req.body, {
         headers: {
@@ -95,30 +96,29 @@ const createAdmin = (req) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // CREATE FACULTY
 const createFaculty = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    var _e, _f;
+    var _d, _e;
     const { academicFaculty, academicDepartment } = req.body.faculty;
     // SET PROFILE IMAGE
-    req.body.faculty.profileImage = (req === null || req === void 0 ? void 0 : req.fileRelativePath) || '';
+    req.body.faculty.profileImage = (req === null || req === void 0 ? void 0 : req.fileURL) || '';
     // console.log({ data: req.body });
     try {
         const facultyRes = yield axios_1.AuthService.get(`/academic-faculties?syncId=${academicFaculty}`, {
             headers: { authorization: req.headers.authorization }
         });
         // console.log('Faculty response:', facultyRes.data);
-        if ((_e = facultyRes === null || facultyRes === void 0 ? void 0 : facultyRes.data) === null || _e === void 0 ? void 0 : _e.length) {
+        if ((_d = facultyRes === null || facultyRes === void 0 ? void 0 : facultyRes.data) === null || _d === void 0 ? void 0 : _d.length) {
             req.body.faculty.academicFaculty = facultyRes.data[0].id;
         }
         const deptRes = yield axios_1.AuthService.get(`/academic-departments?syncId=${academicDepartment}`, {
             headers: { Authorization: req.headers.authorization }
         });
         // console.log('Department response:', deptRes.data);
-        if ((_f = deptRes === null || deptRes === void 0 ? void 0 : deptRes.data) === null || _f === void 0 ? void 0 : _f.length) {
+        if ((_e = deptRes === null || deptRes === void 0 ? void 0 : deptRes.data) === null || _e === void 0 ? void 0 : _e.length) {
             req.body.faculty.academicDepartment = deptRes.data[0].id;
         }
     }
     catch (error) {
-        console.error('Sync API error:', error);
-        throw new Error('Faculty/Department sync failed');
+        throw new Error('Faculty/Department sync failed, Please try again');
     }
     // CREATE FACULTY ON MONGODB
     const result = yield axios_1.AuthService.post('users/create-faculty', req.body, {
@@ -169,6 +169,17 @@ const deleteUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
     // RETURN
     return result;
 });
+// UPLOAD PROFILE PICTURE
+const updateProfilePicture = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    req.body.profileImage = (req === null || req === void 0 ? void 0 : req.fileURL) || '';
+    const result = yield axios_1.AuthService.patch(`/users/${req.body.id}`, req.body, {
+        headers: {
+            Authorization: req.headers.authorization
+        }
+    });
+    // RETURN
+    return result;
+});
 // EXPORT SERVICES
 exports.UserServices = {
     createStudent,
@@ -177,5 +188,6 @@ exports.UserServices = {
     getAllUsers,
     getSingleUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    updateProfilePicture
 };

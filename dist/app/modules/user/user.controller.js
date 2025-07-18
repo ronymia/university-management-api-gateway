@@ -78,7 +78,17 @@ const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 // DELETE USER
 const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield user_service_1.UserServices.updateUser(req);
+        const result = yield user_service_1.UserServices.deleteUser(req);
+        (0, response_1.default)(res, result);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+// UPDATE USER PROFILE PICTURE
+const updateProfilePicture = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield user_service_1.UserServices.updateProfilePicture(req);
         (0, response_1.default)(res, result);
     }
     catch (error) {
@@ -92,5 +102,6 @@ exports.UserControllers = {
     getAllUsers,
     getSingleUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    updateProfilePicture
 };
