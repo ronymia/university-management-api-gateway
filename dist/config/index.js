@@ -8,7 +8,7 @@ const path_1 = __importDefault(require("path"));
 const zod_1 = require("zod");
 dotenv_1.default.config({ path: path_1.default.join(process.cwd(), '.env') });
 const envVarsZodSchema = zod_1.z.object({
-    NODE_ENV: zod_1.z.string(),
+    NODE_ENV: zod_1.z.string().default('development'),
     PORT: zod_1.z
         .string()
         .default('3030')
