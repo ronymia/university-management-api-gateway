@@ -6,7 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const http_proxy_middleware_1 = require("http-proxy-middleware");
 const config_1 = __importDefault(require("../../config"));
+const auth_1 = __importDefault(require("../middlewares/auth"));
 const router = express_1.default.Router();
+router.use((0, auth_1.default)());
 const authServiceProxy = (0, http_proxy_middleware_1.createProxyMiddleware)({
     target: config_1.default.authServiceUrl,
     changeOrigin: true,
@@ -41,11 +43,7 @@ const coreServiceProxy = (0, http_proxy_middleware_1.createProxyMiddleware)({
 const coreCustomRoutes = [
     '/students/my-courses',
     '/students/my-course-schedules',
-    '/students/my-academic-info',
-    '/faculties/my-courses',
-    '/faculties/my-course-students',
-    '/faculties/:id/assigned-courses',
-    '/faculties/:id/remove-courses'
+    '/students/my-academic-info'
 ];
 coreCustomRoutes.forEach((route) => {
     router.use(route, coreServiceProxy);
@@ -55,7 +53,7 @@ const authRoutes = [
     '/auth',
     '/users',
     '/admins',
-    '/faculties',
+    '/auth-faculties',
     '/students',
     '/management-departments'
 ];
@@ -64,6 +62,7 @@ authRoutes.forEach((route) => {
 });
 // Core Service Routes
 const coreRoutes = [
+    '/faculties',
     '/academic-semesters',
     '/academic-faculties',
     '/academic-departments',
