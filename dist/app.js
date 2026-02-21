@@ -11,7 +11,10 @@ const globalExceptionHandler_1 = __importDefault(require("./app/middlewares/glob
 const routes_1 = __importDefault(require("./app/routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3003', 'https://university-management-alfa.vercel.app'],
+    origin: [
+        'http://localhost:3003',
+        'https://university-management-api-gateway-production.up.railway.app'
+    ],
     credentials: true
 }));
 app.use(express_1.default.urlencoded({ extended: true }));
